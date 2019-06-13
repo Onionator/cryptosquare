@@ -17,7 +17,6 @@ $(document).ready(function () {
     var alphaNumericMessage = condensedMessage;
     for (i = 0; i < condensedMessage.length; i++) {
       if (alphaNumericMessage.search(punctuation)) {
-        console.log("removing punctuation");
         alphaNumericMessage = alphaNumericMessage.replace(punctuation[i], "")
       }
     };
@@ -26,33 +25,41 @@ $(document).ready(function () {
     var count = alphaNumericMessage.length;
     console.log("we have " + count + " characters");
 
-    //figure out how many columns and rows we need - to be made into a function
     // gets the square root of count
     var squareRoot = Math.sqrt(count);
-    console.log(Math.sqrt(count) + " is the square root of count");
     //take the square root of count and round up to the nearest interger
     var columns = Math.ceil(squareRoot);
-    console.log(columns + " columns");
-
+    console.log(columns + " is the number of columns");
     var result = [];
-
+    var rows = Math.ceil(alphaNumericMessage.length / columns)
+    console.log("We have a total of " + rows + " rows.");
 
     //this loop adds blank strings based on the number of columns
     for (i = 0; i < columns; i++) {
-     result.push("");
-   }
-   console.log(result);
-
-   // figure out why it won't add the last 3 letters !!!!!!!!!!!!!!
-    for (n = 0; n < alphaNumericMessage.length; n++) {
+      result.push("");
+    }
+    for (n = 0; n < rows; n++) {
       //this for loop inserts a character at the end of each string in the array
       for (i = 0; i < columns; i++) {
-        console.log("in for loop of i < columns");
         result[i] = result[i] + (alphaNumericMessage.slice(0,1));
         alphaNumericMessage = alphaNumericMessage.substr(1);
       }
     }
     console.log(result);
-
+    //this will join everything in the array into a string
+    var messageString = result.join("");
+    console.log(messageString);
+    //this will turn the entire srting into a lowercase
+    var messageLowercase = messageString.toLowerCase();
+    console.log(messageLowercase);
+    var encryptedMessage = "";
+        for (i = 0; i < (count/5); i++) {
+        encryptedMessage += (messageLowercase.slice(0,5));
+        messageLowercase = messageLowercase.substr(5);
+        //add a space between each set of five chars
+        encryptedMessage += " ";
+    }
+    encryptedMessage = encryptedMessage.trimEnd();
+    console.log(encryptedMessage);
   });
 });
