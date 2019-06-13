@@ -8,7 +8,6 @@ $(document).ready(function () {
     //replace all the spaces in the string
     // for (i = 0; i < originalMessage.length; i++) {
     while (condensedMessage.search(" ") !== -1) {
-      console.log(condensedMessage.search(" "));
       condensedMessage = condensedMessage.replace(" ", "");
     };
     console.log(condensedMessage);
@@ -17,6 +16,7 @@ $(document).ready(function () {
     var alphaNumericMessage = condensedMessage;
     for (i = 0; i < condensedMessage.length; i++) {
       if (alphaNumericMessage.search(punctuation)) {
+        console.log("removing punctuation");
         alphaNumericMessage = alphaNumericMessage.replace(punctuation[i], "")
       }
     };
@@ -61,5 +61,8 @@ $(document).ready(function () {
     }
     encryptedMessage = encryptedMessage.trimEnd();
     console.log(encryptedMessage);
+    //this will output encrypted code to screen
+$ ("p").text(encryptedMessage);
+
   });
 });
